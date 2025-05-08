@@ -4,6 +4,9 @@ export type Stats = {
     variance: number;
     stdDev: number;
     outOfSpec: number;
+    values: number[]; 
+    min: number;              
+    max: number;
   };
   
   export function calculateStats(values: number[], min: number, max: number): Stats {
@@ -17,7 +20,10 @@ export type Stats = {
         median: 0,
         variance: 0,
         stdDev: 0,
-        outOfSpec: values.length
+        outOfSpec: values.length,
+        values: values,
+        min: min, 
+        max: max
       };
     }
   
@@ -36,7 +42,7 @@ export type Stats = {
   
     const outOfSpec = values.filter(v => v < min || v > max).length;
   
-    return { mean, median, variance, stdDev, outOfSpec };
+    return { mean, median, variance, stdDev, outOfSpec, values, min, max };
   }
   
   

@@ -1,5 +1,6 @@
 import type { Stats } from '../utils/statistics';
 import { generateResultsPDF } from '../utils/pdf-results';
+import ValuesChart from './ValuesChart';
 
 type Props = {
   results: Stats;
@@ -8,7 +9,7 @@ type Props = {
 function ResultsPanel({ results }: Props) {
   return (
     <div className="results-panel">
-    <h2 style={{ margin: 0 }}>Resultados:</h2>
+      <h2 style={{ margin: 0 }}>Resultados:</h2>
       <ul>
         <li>Promedio: {results.mean.toFixed(2)}</li>
         <li>Mediana: {results.median}</li>
@@ -17,6 +18,7 @@ function ResultsPanel({ results }: Props) {
         <li>Valores fuera de especificación: {results.outOfSpec}</li>
       </ul>
       <p>*Solo tenemos en cuenta los valores en el rango establecido.</p>
+      <ValuesChart values={results.values} min={results.min} max={results.max} />
       <button onClick={() => generateResultsPDF(results)}>Descargar PDF</button>
     </div>
   );
